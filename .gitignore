@@ -1,0 +1,7 @@
+CVS
+target/
+.settings/
+*.jar
+*.class
+.project
+.classpath

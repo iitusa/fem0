@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RunWith(Parameterized.class)
-public class TestFEF0 {
+public class TestFEM0 {
 
     static final private int nnn = 720;
     static final double __xu = 7.0;
@@ -51,7 +51,7 @@ public class TestFEF0 {
     final double bbb;
     final double ccc;
 
-    public TestFEF0(double aaa, double bbb, double ccc) {
+    public TestFEM0(double aaa, double bbb, double ccc) {
         this.aaa = aaa;
         this.bbb = bbb;
         this.ccc = ccc;

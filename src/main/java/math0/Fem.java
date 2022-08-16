@@ -1,6 +1,6 @@
 package math0;
 
-import org.apache.commons.math.linear.*;
+import org.apache.commons.math3.linear.*;
 
 /**
  * finite element method
@@ -47,7 +47,7 @@ public class Fem {
      * @throws NotSymmetricMatrixException
      * @throws NotPositiveDefiniteMatrixException
      */
-    public RealVector solve(double xl, double xu, double yl, double yu, double ccc) throws NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {
+    public RealVector solve(double xl, double xu, double yl, double yu, double ccc) {
 
         final RealMatrix qqq = this.makeTri(nnn - 1, xl, xu);
 
@@ -69,10 +69,10 @@ public class Fem {
         final RealMatrix theQQQ = MatrixUtils.createRealIdentityMatrix(nnn-1).scalarMultiply(ccc).subtract(qqq);
         final RealVector fef;
         if (ccc>=0) {
-            final CholeskyDecomposition lu = new CholeskyDecompositionImpl(theQQQ);
+            final CholeskyDecomposition lu = new CholeskyDecomposition(theQQQ);
             fef = lu.getSolver().solve(rv);
         } else {
-            final LUDecomposition lu = new LUDecompositionImpl(theQQQ);
+            final LUDecomposition lu = new LUDecomposition(theQQQ);
             fef = lu.getSolver().solve(rv);
         }
         return fef;

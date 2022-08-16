@@ -1,6 +1,6 @@
 package math0;
 
-import org.apache.commons.math.linear.*;
+import org.apache.commons.math3.linear.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,24 +47,15 @@ public class TestFEF0 {
     }
 
     final private Fem fem = new Fem(nnn);
-//    private RealMatrix qqq;
     final double aaa;
     final double bbb;
     final double ccc;
-//    private RealVector rv;
-//    final private double[] expected = new double[nnn+1];
-
 
     public TestFEF0(double aaa, double bbb, double ccc) {
         this.aaa = aaa;
         this.bbb = bbb;
         this.ccc = ccc;
     }
-
-//    @Before
-//    public void setUp() {
-//        qqq = fem.makeTri(nnn-1, __xl, __xu);
-//    }
 
     private RealVector setupExpected(int nnn, double xl, double xu, double aaa, double bbb, double ccc) {
         final double[] expected = new double[nnn +1];
@@ -81,22 +72,8 @@ public class TestFEF0 {
         return MatrixUtils.createRealVector(expected);
     }
 
-//    @Test
-//    @Ignore
-//    public void test9() throws NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {
-//        final EigenDecomposition eigenDecomposition = new EigenDecompositionImpl(qqq.getSubMatrix(1,nnn-2,1,nnn-2), Double.MIN_NORMAL);
-//        Logger.getAnonymousLogger().info(Arrays.toString(eigenDecomposition.getRealEigenvalues()));
-//    }
-
-//    @Test
-//    @Ignore
-//    public void printQQQ1() throws NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {
-//        final RealMatrix qqqqq = MatrixUtils.createRealIdentityMatrix(nnn-1).scalarMultiply(ccc).add(qqq);
-//        Logger.getAnonymousLogger().info("" + qqqqq);
-//    }
-
     @Test
-    public void test1b() throws NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {
+    public void test1b() {
         final RealVector expected = setupExpected(nnn, __xl, __xu, aaa, bbb, ccc);
         final RealVector fef = fem.solve(__xl, __xu, expected.getEntry(0), expected.getEntry(nnn), ccc);
 
@@ -111,7 +88,7 @@ public class TestFEF0 {
     }
 
     @Test
-    public void test1a() throws NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {
+    public void test1a() {
         final double delta = (__xu-__xl) / nnn;
         final double delta2 = delta*delta;
 
@@ -130,26 +107,4 @@ public class TestFEF0 {
             Assert.assertEquals(""+ ii, expect, actual, eps);
         }
     }
-
-//    @Test
-//    @Ignore
-//    public void test2() {
-//        final double x0 = Math.PI * 0.75;
-//        final double eps=1e-6;
-//        final double y0 = Math.cos(x0);
-//        final double y1 = Math.cos(x0-eps);
-//        final double y2 = Math.cos(x0 + eps);
-//        Logger.getAnonymousLogger().info("" + (y1+y2-2.0*y0)/eps/eps);
-//    }
-//
-//    @Test
-//    @Ignore
-//    public void test2a() {
-//        final double x0 = Math.PI * 0.75;
-//        final double eps=1e-6;
-//        final double y0 = Math.cos(x0);
-//        final double y1 = Math.cos(x0-eps);
-//        final double y2 = Math.cos(x0+eps);
-//        Logger.getAnonymousLogger().info("" + (2.0 * y2-2.0*y0)/eps/eps);
-//    }
 }

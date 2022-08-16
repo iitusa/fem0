@@ -1,8 +1,8 @@
 package math0;
 
-import org.apache.commons.math.linear.*;
-import org.apache.commons.math.random.GaussianRandomGenerator;
-import org.apache.commons.math.random.JDKRandomGenerator;
+import org.apache.commons.math3.linear.*;
+import org.apache.commons.math3.random.GaussianRandomGenerator;
+import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -35,15 +35,15 @@ public class TestQR0 {
     }
 
     @Test
-    public void testCholesky() throws NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {
-        final CholeskyDecomposition cholesky = new CholeskyDecompositionImpl(pdm);
+    public void testCholesky() {
+        final CholeskyDecomposition cholesky = new CholeskyDecomposition(pdm);
         Logger.getAnonymousLogger().info("" + cholesky.getDeterminant());
     }
 
     @Test
-    public void testQR() throws NotSymmetricMatrixException, NotPositiveDefiniteMatrixException {
+    public void testQR() {
 
-        final EigenDecomposition eigenDecomposition = new EigenDecompositionImpl(pdm, Double.MIN_NORMAL);
+        final EigenDecomposition eigenDecomposition = new EigenDecomposition(pdm, Double.MIN_NORMAL);
         Logger.getAnonymousLogger().info(Arrays.toString(eigenDecomposition.getRealEigenvalues()));
         Logger.getAnonymousLogger().info("" + eigenDecomposition.getDeterminant());
 
@@ -55,7 +55,7 @@ public class TestQR0 {
     public void testQR0() {
         final double[][] doubles = {{1.0,4.0},{4.0,16.0}};
         final RealMatrix nnn = MatrixUtils.createRealMatrix(doubles);
-        final QRDecomposition qr = new QRDecompositionImpl(nnn);
+        final QRDecomposition qr = new QRDecomposition(nnn);
         Logger.getAnonymousLogger().info("H=" + qr.getH());
         Logger.getAnonymousLogger().info("Q=" + qr.getQ());
         Logger.getAnonymousLogger().info("R=" + qr.getR());
